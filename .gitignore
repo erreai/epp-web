@@ -8,6 +8,12 @@
 # testing
 /coverage
 
+/public
+/src
+
+package.json
+readme.md
+yarn.lock
 
 # misc
 .DS_Store
