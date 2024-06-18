@@ -139,8 +139,8 @@ const App = () => {
             <th>Alarma</th>
             <th>Término</th>
             <th>Tiempo total</th>
+            <th>Inicio - Alarma</th>
             <th>Tiempo de Trabajo</th>
-            <th>Tiempo de Trabajo / 2</th>
           </tr>
         </thead>
         <tbody>
