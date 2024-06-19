@@ -1,3 +1,20 @@
+/*
+ * Este archivo es parte de WebApp Control Test de Consumo.
+ *
+ * WebApp Control Test de Consumo es software gratuito: puedes redistribuirlo y/o modificarlo
+ * bajo los términos de la Licencia Pública General GNU publicada por
+ * la Free Software Foundation, ya sea la versión 3 de la Licencia, o
+ * cualquier versión posterior.
+ *
+ * WebApp Control Test de Consumo se distribuye con la esperanza de que sea útil,
+ * pero SIN NINGUNA GARANTÍA; sin siquiera la garantía implícita de
+ * COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Ver el
+ * Licencia Pública General GNU para más detalles.
+ *
+ * Deberías haber recibido una copia de la Licencia Pública General GNU
+ * junto con WebApp Control Test de Consumo. En caso contrario, consulte <https://www.gnu.org/licenses/>.
+ */
+
 import React, { useState, useEffect } from 'react';
 import { jsPDF } from 'jspdf';
 import { utils, writeFile } from 'xlsx';
@@ -273,7 +290,7 @@ const App = () => {
         <button className='btn btn-success' onClick={exportExcel}>Exportar a Excel</button>
       </div>
       <div className="footer mt-3 pe-2">
-        <p className="text-end mb-0">Bomberos de Chile</p>
+        <p className="text-end mb-0">Licencia <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3</a>. Bomberos de Chile</p>
       </div>
 
       
@@ -284,9 +301,10 @@ const App = () => {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <p>Esta WebApp fue creada por Raimundo Concha Corti, Instructor ANB. Cuerpo de Bomberos de Ñuñoa. 2024</p>
+            <p>Esta WebApp fue creada por Raimundo Concha Corti, Instructor ANB. Cuerpo de Bomberos de Ñuñoa.</p>
+            <p>Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel="noreferrer">Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua.</p>
             <p>Repo: <a href='https://github.com/erreai/epp-web'>https://github.com/erreai/epp-web</a></p>
-            <p>Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel="noreferrer">Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua</p>
+            <p>2024</p>
           </div>
         </div>
       </div>

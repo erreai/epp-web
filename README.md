@@ -29,3 +29,10 @@ La compilación está minimizada y los nombres de archivos incluyen los hashes.\
 ¡Su aplicación está lista para ser implementada!
 
 Consulte la sección sobre [implementación] (https://facebook.github.io/create-react-app/docs/deployment) para obtener más información.
+
+### Licencia
+WebApp Control Test de Consumo
+Copyright (C) 2024, Raimundo Concha Corti.
+WebApp Control Test de Consumo es software gratuito: puedes redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, ya sea la versión 3 de la Licencia, o cualquier versión posterior.
+WebApp Control Test de Consumo se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA; sin siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Ver el Licencia Pública General GNU para más detalles.
+Deberías haber recibido una copia de la Licencia Pública General GNU junto con WebApp Control Test de Consumo. En caso contrario, consulta [https://www.gnu.org/licenses/](https://www.gnu.org/licenses/).
