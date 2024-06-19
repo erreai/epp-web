@@ -273,7 +273,7 @@ const App = () => {
         <button className='btn btn-success' onClick={exportExcel}>Exportar a Excel</button>
       </div>
       <div className="footer mt-3 pe-2">
-        <p className="text-end mb-0">Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel="noreferrer">Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua</p>
+        <p className="text-end mb-0">Bomberos de Chile</p>
       </div>
 
       
@@ -286,7 +286,7 @@ const App = () => {
           <div className="modal-body">
             <p>Esta WebApp fue creada por Raimundo Concha Corti, Instructor ANB. Cuerpo de Bomberos de Ñuñoa. 2024</p>
             <p>Repo: <a href='https://github.com/erreai/epp-web'>https://github.com/erreai/epp-web</a></p>
-
+            <p>Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel="noreferrer">Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua</p>
           </div>
         </div>
       </div>
