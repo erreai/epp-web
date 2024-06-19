@@ -73,14 +73,16 @@ const ParticipantRow = ({ participant, index, updateParticipant }) => {
 };
 
 const App = () => {
-  const [participants, setParticipants] = useState(Array(24).fill().map(() => ({
+  const initialParticipants = Array(16).fill().map(() => ({
     name: '',
     startTime: null,
     alarmTime: null,
     endTime: null,
     elapsedTime: 0,
     observations: ''
-  })));
+  }));
+
+  const [participants, setParticipants] = useState(initialParticipants);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -101,6 +103,18 @@ const App = () => {
         updatedParticipants[index] = { ...updatedParticipants[index], [key]: value };
         return updatedParticipants;
       });
+    }
+  };
+  const addParticipant = () => {
+    if (participants.length < 24) {
+      setParticipants([...participants, {
+        name: '',
+        startTime: null,
+        alarmTime: null,
+        endTime: null,
+        elapsedTime: 0,
+        observations: ''
+      }]);
     }
   };
 
@@ -191,6 +205,9 @@ const App = () => {
           </tbody>
         </table>
       </div>
+      {participants.length < 24 && (
+        <button className='btn btn-sm btn-primary' onClick={addParticipant}>Agregar Participante</button>
+      )}
       <div className="d-flex flex-row justify-content-evenly">
         <button className='btn btn-success' onClick={exportPDF}>Exportar a PDF</button>
         <button className='btn btn-success' onClick={exportExcel}>Exportar a Excel</button>
