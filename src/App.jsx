@@ -120,39 +120,46 @@ const App = () => {
 
   const exportPDF = () => {
     const doc = new jsPDF({ orientation: 'landscape' });
+
+    // Define el tamaño y estilo de la fuente
+    doc.setFontSize(10);
+
     doc.text('Tabla de Participantes', 10, 10);
     
-    // Add table headers
-    doc.text('N°', 10, 20);
-    doc.text('Nombre', 30, 20);
-    doc.text('Tiempo de partida', 70, 20);
-    doc.text('Alarma', 120, 20);
-    doc.text('Término', 170, 20);
-    doc.text('Tiempo total', 220, 20);
-    doc.text('Inicio-Alarma', 270, 20);
-    doc.text('Tiempo de Trabajo', 320, 20);
-    doc.text('Observaciones', 370, 20);
+    // Ajusta el tamaño de la letra y la distancia entre columnas
+    const startX = 5;
+    const startY = 20;
+    const columnWidth = 30;
 
-    let y = 30;
+    // Añade las cabeceras de la tabla
+    doc.text('Nombre', startX, startY);
+    doc.text('Tiempo de partida', startX + 2 * columnWidth, startY);
+    doc.text('Alarma', startX + 3 * columnWidth, startY);
+    doc.text('Término', startX + 4 * columnWidth, startY);
+    doc.text('Tiempo total', startX + 5 * columnWidth, startY);
+    doc.text('Inicio-Alarma', startX + 6 * columnWidth, startY);
+    doc.text('Tiempo de Trabajo', startX + 7 * columnWidth, startY);
+    doc.text('Observaciones', startX + 8.5 * columnWidth, startY);
+
+    let y = startY + 10;
     participants.forEach((participant, index) => {
       const workTime = participant.alarmTime ? (participant.alarmTime - participant.startTime) : 0;
       const halfWorkTime = workTime / 2;
       const totalTime = participant.endTime ? (participant.endTime - participant.startTime) : 0;
 
-      doc.text(`${index + 1}`, 10, y);
-      doc.text(participant.name, 30, y);
-      doc.text(participant.startTime ? new Date(participant.startTime).toLocaleTimeString() : '', 70, y);
-      doc.text(participant.alarmTime ? new Date(participant.alarmTime).toLocaleTimeString() : '', 120, y);
-      doc.text(participant.endTime ? new Date(participant.endTime).toLocaleTimeString() : '', 170, y);
-      doc.text(formatTime(totalTime), 220, y);
-      doc.text(formatTime(workTime), 270, y);
-      doc.text(formatTime(halfWorkTime), 320, y);
-      doc.text(participant.observations, 370, y);
+      doc.text(`${`${index + 1} ` + participant.name}`, startX, y);
+      doc.text(participant.startTime ? new Date(participant.startTime).toLocaleTimeString() : '', startX + 2 * columnWidth, y);
+      doc.text(participant.alarmTime ? new Date(participant.alarmTime).toLocaleTimeString() : '', startX + 3 * columnWidth, y);
+      doc.text(participant.endTime ? new Date(participant.endTime).toLocaleTimeString() : '', startX + 4 * columnWidth, y);
+      doc.text(formatTime(totalTime), startX + 5 * columnWidth, y);
+      doc.text(formatTime(workTime), startX + 6 * columnWidth, y);
+      doc.text(formatTime(halfWorkTime), startX + 7 * columnWidth, y);
+      doc.text(participant.observations, startX + 8.5 * columnWidth, y);
       y += 10;
     });
-
     doc.save('tabla.pdf');
   };
+
   const exportExcel = () => {
     const data = participants.map((participant, index) => ({
       'N°': index + 1,
