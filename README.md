@@ -14,10 +14,10 @@ Creado en base a [Create React App](https://github.com/facebook/create-react-app
 ### `yarn start`
 
 Ejecuta la aplicación en modo de desarrollo.\
-Abra [http://localhost:3000](http://localhost:3000) para verlo en su navegador.
+Abre [http://localhost:3000](http://localhost:3000) para verlo en tu navegador.
 
-La página se recargará cuando realice cambios.\
-También es posible que vea errores de pelusa en la consola.
+La página se recargará cuando realices cambios.\
+También es posible que veas errores de pestaña en la consola.
 
 ### `yarn build`
 
@@ -25,9 +25,9 @@ Crea la aplicación para producción en la carpeta `build`.\
 Incluye correctamente React en modo de producción y optimiza la compilación para obtener el mejor rendimiento.
 
 La compilación está minimizada y los nombres de archivos incluyen los hashes.\
-¡Su aplicación está lista para ser implementada!
+¡La aplicación está lista para ser implementada!
 
-Consulte la sección sobre [implementación] (https://facebook.github.io/create-react-app/docs/deployment) para obtener más información.
+Consulta la sección sobre [implementación](https://facebook.github.io/create-react-app/docs/deployment) para obtener más información.
 
 ## Licencia
 Licencia [GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)
