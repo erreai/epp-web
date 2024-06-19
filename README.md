@@ -6,8 +6,8 @@
 - La información se puede exportar en formato PDF o xlsx.
 
 Esta aplicación fue creada por Raimundo Concha Corti, instructor ANB, perteneceinte a la [Segunda Compañía](https://www.bomba2.cl) del [Cuerpo de Bomberos de Ñuñoa](https://www.cbn.cl).
-Creado en base a [Create React App](https://github.com/facebook/create-react-app).
 
+Creado en base a [Create React App](https://github.com/facebook/create-react-app).
 
 ## Scripts Disponibles
 
