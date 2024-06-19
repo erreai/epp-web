@@ -1,6 +1,9 @@
 body{
   height: 100vh;
 }
+h3 {
+  font-size: 1.1rem;
+}
 .main-container .header{
   background: no-repeat top left/100px url('../public/bomberos-de-chile.png') ;
   height: 120px;
@@ -18,6 +21,23 @@ body{
 }
 .footer a {
   color: rgb(235, 1, 1);
+}
+.btn-config {
+  position: absolute;
+  top: 50px;
+  right: 0;
+}
+.label {
+  display: inline-block;
+  margin-right: 15px;
+}
+.label-bold{ font-weight: 600;}
+.options {
+
+}
+.options label {
+  display: inline-block;
+  margin-right: 10px;
 }
 @media screen and (max-width: 1000px) {
   .main-container .header {

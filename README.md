@@ -32,4 +32,5 @@ Nunca es necesario utilizar "expulsar". El conjunto de funciones seleccionado es
 
 ## Pendiwntes
 
-- Mejorar versión mobile
+- Mejorar versión tablet
+- Agregar configuración del ejercicio, para considerar nivel de protección del EPP y tipo de ERA

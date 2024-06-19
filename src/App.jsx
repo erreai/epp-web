@@ -85,6 +85,9 @@ const App = () => {
   const [participants, setParticipants] = useState(initialParticipants);
   const [currentTime, setCurrentTime] = useState(new Date());
 
+  const [protectionLevel, setProtectionLevel] = useState('D');
+  const [eraType, setEraType] = useState('Circuito Abierto');
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -125,10 +128,12 @@ const App = () => {
     doc.setFontSize(10);
 
     doc.text('Tabla de Participantes', 10, 10);
+    doc.text(`Nivel de Protección: ${protectionLevel}`, 10, 20);
+    doc.text(`Tipo de ERA: ${eraType}`, 10, 30);
     
     // Ajusta el tamaño de la letra y la distancia entre columnas
     const startX = 5;
-    const startY = 20;
+    const startY = 40;
     const columnWidth = 30;
 
     // Añade las cabeceras de la tabla
@@ -176,19 +181,50 @@ const App = () => {
     const worksheet = utils.json_to_sheet(data);
     const workbook = utils.book_new();
     utils.book_append_sheet(workbook, worksheet, 'Participantes');
+    const configSheet = utils.aoa_to_sheet([
+      ['Nivel de Protección', protectionLevel],
+      ['Tipo de ERA', eraType],
+    ]);
+    utils.book_append_sheet(workbook, configSheet, 'Configuración');
     writeFile(workbook, 'participantes.xlsx');
   };
 
   return (
     <div className="main-container">
       <button className="btn btn-sm btn-light btn-corner" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-braces-asterisk" viewBox="0 0 16 16">
-        <path fillRule="evenodd" d="M1.114 8.063V7.9c1.005-.102 1.497-.615 1.497-1.6V4.503c0-1.094.39-1.538 1.354-1.538h.273V2h-.376C2.25 2 1.49 2.759 1.49 4.352v1.524c0 1.094-.376 1.456-1.49 1.456v1.299c1.114 0 1.49.362 1.49 1.456v1.524c0 1.593.759 2.352 2.372 2.352h.376v-.964h-.273c-.964 0-1.354-.444-1.354-1.538V9.663c0-.984-.492-1.497-1.497-1.6M14.886 7.9v.164c-1.005.103-1.497.616-1.497 1.6v1.798c0 1.094-.39 1.538-1.354 1.538h-.273v.964h.376c1.613 0 2.372-.759 2.372-2.352v-1.524c0-1.094.376-1.456 1.49-1.456v-1.3c-1.114 0-1.49-.362-1.49-1.456V4.352C14.51 2.759 13.75 2 12.138 2h-.376v.964h.273c.964 0 1.354.444 1.354 1.538V6.3c0 .984.492 1.497 1.497 1.6M7.5 11.5V9.207l-1.621 1.621-.707-.707L6.792 8.5H4.5v-1h2.293L5.172 5.879l.707-.707L7.5 6.792V4.5h1v2.293l1.621-1.621.707.707L9.208 7.5H11.5v1H9.207l1.621 1.621-.707.707L8.5 9.208V11.5z"/>
-      </svg>
+        <i class="bi bi-braces-asterisk"></i>
       </button>
       <div className="header d-flex flex-row justify-content-evenly align-items-center">
         <h1>Control Test de Consumo</h1>
         <h2>Hora actual: {currentTime.toLocaleTimeString()}</h2>
+      </div>
+      <div className="className">
+        <button className="btn btn-sm btn-secondary btn-config" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          <i className="bi bi-gear-wide-connected"></i>
+        </button>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <div className="config-section">
+              <h3>Configuración General del Ejercicio</h3>
+              <div className='d-flex flex-row'>
+                <label className='label-bold label'>Nivel de Protección:</label>
+                <div className='options'>
+                  <label><input type="radio" value="A" checked={protectionLevel === 'A'} onChange={() => setProtectionLevel('A')} /> A</label>
+                  <label><input type="radio" value="B" checked={protectionLevel === 'B'} onChange={() => setProtectionLevel('B')} /> B</label>
+                  <label><input type="radio" value="C" checked={protectionLevel === 'C'} onChange={() => setProtectionLevel('C')} /> C</label>
+                  <label><input type="radio" value="D" checked={protectionLevel === 'D'} onChange={() => setProtectionLevel('D')} /> D</label>
+                </div>
+              </div>
+              <div className='d-flex flex-row'>
+                <label className='label-bold label'>Tipo de ERA:</label>
+                <div className='options'>
+                  <label><input type="radio" value="Circuito Abierto" checked={eraType === 'Circuito Abierto'} onChange={() => setEraType('Circuito Abierto')} /> Circuito Abierto</label>
+                  <label><input type="radio" value="Circuito Cerrado" checked={eraType === 'Circuito Cerrado'} onChange={() => setEraType('Circuito Cerrado')} /> Circuito Cerrado</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="table-responsive">
         <table className='table table-striped'>
