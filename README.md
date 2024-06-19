@@ -30,3 +30,6 @@ En su lugar, copiará todos los archivos de configuración y las dependencias tr
 
 Nunca es necesario utilizar "expulsar". El conjunto de funciones seleccionado es adecuado para implementaciones pequeñas y medianas, y no debería sentirse obligado a utilizar esta función. Sin embargo, entendemos que esta herramienta no sería útil si no pudiera personalizarla cuando esté listo para usarla.
 
+## Pendiwntes
+
+- Mejorar versión mobile

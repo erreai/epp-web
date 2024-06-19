@@ -57,17 +57,17 @@ const ParticipantRow = ({ participant, index, updateParticipant }) => {
 
   return (
     <tr>
-      <td>{index + 1}</td>
-      <td><input type="text" value={participant.name} onChange={(e) => updateParticipant(index, 'name', e.target.value, true)} /></td>
-      <td onClick={handleStart}>
+      <td data-label="N°">{index + 1}</td>
+      <td data-icon="bi bi-chat-left-dots" data-label="Nombre"><input type="text" value={participant.name} onChange={(e) => updateParticipant(index, 'name', e.target.value, true)} /></td>
+      <td data-icon="d-sm-none bi bi-play-circle" data-label="Partida"  onClick={handleStart}>
         {participant.startTime ? new Date(participant.startTime).toLocaleTimeString() : <button className='btn btn-sm btn-primary'>Iniciar</button>}
       </td>
-      <td onClick={handleAlarm}>{participant.alarmTime ? new Date(participant.alarmTime).toLocaleTimeString() : <button className='btn btn-sm btn-outline-secondary'>Marcar Alarma</button>}</td>
-      <td onClick={handleEnd}>{participant.endTime ? new Date(participant.endTime).toLocaleTimeString() : <button className='btn btn-sm btn-outline-secondary'>Marcar Término</button>}</td>
-      <td>{formatTime(totalTime)}</td>
-      <td>{formatTime(workTime)}</td>
-      <td>{formatTime(halfWorkTime)}</td>
-      <td><input type="text" value={participant.observations} onChange={(e) => updateParticipant(index, 'observations', e.target.value, true)} /></td>
+      <td data-icon="d-sm-none bi bi-bell" data-label="Alarma" onClick={handleAlarm}>{participant.alarmTime ? new Date(participant.alarmTime).toLocaleTimeString() : <button className='btn btn-sm btn-outline-secondary'>Marcar Alarma</button>}</td>
+      <td data-icon="d-sm-none bi bi-stop-circle" data-label="Término" onClick={handleEnd}>{participant.endTime ? new Date(participant.endTime).toLocaleTimeString() : <button className='btn btn-sm btn-outline-secondary'>Marcar Término</button>}</td>
+      <td data-icon="d-sm-none bi bi-stopwatch" data-label="Total">{formatTime(totalTime)}</td>
+      <td data-icon="d-sm-none bi bi-alarm" data-label="Inicio-Alarma">{formatTime(workTime)}</td>
+      <td data-icon="d-sm-none bi bi-plus-slash-minus" data-label="Trabajo" >{formatTime(halfWorkTime)}</td>
+      <td data-icon="bi bi-pencil-square" data-label="Obs."><input type="text" value={participant.observations} onChange={(e) => updateParticipant(index, 'observations', e.target.value, true)} /></td>
     </tr>
   );
 };
@@ -192,16 +192,16 @@ const App = () => {
       </div>
       <div className="table-responsive">
         <table className='table table-striped'>
-          <thead>
+          <thead className='hide-sm'>
             <tr>
               <th>N°</th>
               <th>Nombre</th>
-              <th><span className="hide-sm">Tiempo de partida</span> <i className="d-sm-none bi bi-play-circle"></i></th>
-              <th><span className="hide-sm">Alarma</span> <i className="d-sm-none bi bi-bell"></i></th>
-              <th><span className="hide-sm">Término</span> <i className="d-sm-none bi bi-stop-circle"></i></th>
-              <th><span className="hide-sm">Tiempo total</span> <i className="d-sm-none bi bi-stopwatch"></i></th>
-              <th><span className="hide-sm">Inicio-Alarma</span> <i className="d-sm-none bi bi-alarm"></i> </th>
-              <th><span className="hide-sm">Tiempo de Trabajo</span> <i className="d-sm-none bi bi-plus-slash-minus"></i></th>
+              <th>Tiempo de partida</th>
+              <th>Alarma </th>
+              <th>Término</th>
+              <th>Tiempo total</th>
+              <th>Inicio-Alarma </th>
+              <th>Tiempo de Trabajo</th>
               <th>Observaciones</th>
             </tr>
           </thead>
@@ -212,15 +212,17 @@ const App = () => {
           </tbody>
         </table>
       </div>
-      {participants.length < 24 && (
-        <button className='btn btn-sm btn-primary' onClick={addParticipant}>Agregar Participante</button>
-      )}
-      <div className="d-flex flex-row justify-content-evenly">
+      <div className="mt-1 ms-2">
+        {participants.length < 24 && (
+          <button className='btn btn-sm btn-primary' onClick={addParticipant}>Agregar Participante</button>
+        )}
+      </div>
+      <div className="d-flex flex-row justify-content-evenly mt-3 ms-2">
         <button className='btn btn-success' onClick={exportPDF}>Exportar a PDF</button>
         <button className='btn btn-success' onClick={exportExcel}>Exportar a Excel</button>
       </div>
-      <div className="footer mt-3 me-2">
-        <p className="text-end">Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel="noreferrer">Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua</p>
+      <div className="footer mt-3 pe-2">
+        <p className="text-end mb-0">Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel="noreferrer">Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua</p>
       </div>
 
       

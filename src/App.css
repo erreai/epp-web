@@ -1,3 +1,6 @@
+body{
+  height: 100vh;
+}
 .main-container .header{
   background: no-repeat top left/100px url('../public/bomberos-de-chile.png') ;
   height: 120px;
@@ -7,6 +10,14 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+.footer {
+  background: #253748;
+  color: #fff;
+  padding: 15px 0;
+}
+.footer a {
+  color: rgb(235, 1, 1);
 }
 @media screen and (max-width: 1000px) {
   .main-container .header {
@@ -19,5 +30,25 @@
   }
   .hide-sm {
     display: none
+  }
+  table tr {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  table td:first-child {
+    width: 35px;
+  }
+  table td:nth-child(2) {width: calc(100% - 35px);}
+  table td:nth-child(2) input, table td:last-child, table td:last-child input {width: 100%;}
+  table td:nth-child(3), table td:nth-child(6) {
+    width: 25%;
+  }
+  table td:nth-child(4),table td:nth-child(5), 
+  table td:nth-child(7),table td:nth-child(8) {
+    width: 37.5%;
+  }
+  table td::before {
+    content: attr(data-label);
+    display: block;
   }
 }
