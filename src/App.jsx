@@ -3,6 +3,7 @@ import { jsPDF } from 'jspdf';
 import { utils, writeFile } from 'xlsx';
 import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import "bootstrap-icons/font/bootstrap-icons.min.css";
 import './App.css'; // Asegúrate de importar el archivo CSS
 
 // Función para formatear el tiempo en HH:MM:SS
@@ -174,12 +175,12 @@ const App = () => {
             <tr>
               <th>N°</th>
               <th>Nombre</th>
-              <th>Tiempo de partida</th>
-              <th>Alarma</th>
-              <th>Término</th>
-              <th>Tiempo total</th>
-              <th>Inicio-Alarma</th>
-              <th>Tiempo de Trabajo</th>
+              <th><span className="hide-sm">Tiempo de partida</span> <i className="d-sm-none bi bi-play-circle"></i></th>
+              <th><span className="hide-sm">Alarma</span> <i className="d-sm-none bi bi-bell"></i></th>
+              <th><span className="hide-sm">Término</span> <i className="d-sm-none bi bi-stop-circle"></i></th>
+              <th><span className="hide-sm">Tiempo total</span> <i className="d-sm-none bi bi-stopwatch"></i></th>
+              <th><span className="hide-sm">Inicio-Alarma</span> <i className="d-sm-none bi bi-alarm"></i> </th>
+              <th><span className="hide-sm">Tiempo de Trabajo</span> <i className="d-sm-none bi bi-plus-slash-minus"></i></th>
               <th>Observaciones</th>
             </tr>
           </thead>

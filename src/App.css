@@ -17,4 +17,7 @@
   .footer p{
     text-align: center !important;
   }
+  .hide-sm {
+    display: none
+  }
 }
