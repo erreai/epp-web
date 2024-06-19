@@ -8,3 +8,13 @@
   top: 0;
   right: 0;
 }
+@media screen and (max-width: 1000px) {
+  .main-container .header {
+    font-size: 22px;
+    flex-direction: column!important;
+    background: transparent;
+  }
+  .footer p{
+    text-align: center !important;
+  }
+}
