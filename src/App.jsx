@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import './App.css'; // Asegúrate de importar el archivo CSS
+import logo from './logo.png';
 
 // Función para formatear el tiempo en HH:MM:SS
 const formatTime = (ms) => {
@@ -124,45 +125,57 @@ const App = () => {
   const exportPDF = () => {
     const doc = new jsPDF({ orientation: 'landscape' });
 
+    const img = new Image();
+    img.src = logo;
+    doc.addImage(img, 'PNG', 270, 5, 22, 25);
+
+
     // Define el tamaño y estilo de la fuente
     doc.setFontSize(10);
-
-    doc.text('Tabla de Participantes', 10, 10);
-    doc.text(`Nivel de Protección: ${protectionLevel}`, 10, 20);
-    doc.text(`Tipo de ERA: ${eraType}`, 10, 30);
-    
+    const date = new Date().toLocaleDateString();
+    doc.text(`Fecha: ${date}`, 10, 10);
+    doc.text(`Nivel de Protección: ${protectionLevel}`, 100, 10);
+    doc.text(`Tipo de ERA: ${eraType}`, 150, 10);
+    doc.setFontSize(20);
+    doc.text('Tabla de Participantes', 10, 20);
+    doc.setFontSize(10);
     // Ajusta el tamaño de la letra y la distancia entre columnas
     const startX = 5;
-    const startY = 40;
+    const startY = 30;
     const columnWidth = 30;
 
     // Añade las cabeceras de la tabla
     doc.text('Nombre', startX, startY);
-    doc.text('Tiempo de partida', startX + 2 * columnWidth, startY);
-    doc.text('Alarma', startX + 3 * columnWidth, startY);
-    doc.text('Término', startX + 4 * columnWidth, startY);
-    doc.text('Tiempo total', startX + 5 * columnWidth, startY);
-    doc.text('Inicio-Alarma', startX + 6 * columnWidth, startY);
-    doc.text('Tiempo de Trabajo', startX + 7 * columnWidth, startY);
-    doc.text('Observaciones', startX + 8.5 * columnWidth, startY);
+    doc.text('Partida', startX + 2 * columnWidth, startY);
+    doc.text('Alarma', startX + 2.8 * columnWidth, startY);
+    doc.text('Término', startX + 3.5 * columnWidth, startY);
+    doc.text('Tiempo total', startX + 4.2 * columnWidth, startY);
+    doc.text('Inicio-Alarma', startX + 5 * columnWidth, startY);
+    doc.text('T. de Trabajo', startX + 5.8 * columnWidth, startY);
+    doc.text('Observaciones', startX + 6.7 * columnWidth, startY);
 
     let y = startY + 10;
     participants.forEach((participant, index) => {
+      if (index === 17) {
+        doc.addPage();
+        y = 15;
+      }
       const workTime = participant.alarmTime ? (participant.alarmTime - participant.startTime) : 0;
       const halfWorkTime = workTime / 2;
       const totalTime = participant.endTime ? (participant.endTime - participant.startTime) : 0;
 
       doc.text(`${`${index + 1} ` + participant.name}`, startX, y);
       doc.text(participant.startTime ? new Date(participant.startTime).toLocaleTimeString() : '', startX + 2 * columnWidth, y);
-      doc.text(participant.alarmTime ? new Date(participant.alarmTime).toLocaleTimeString() : '', startX + 3 * columnWidth, y);
-      doc.text(participant.endTime ? new Date(participant.endTime).toLocaleTimeString() : '', startX + 4 * columnWidth, y);
-      doc.text(formatTime(totalTime), startX + 5 * columnWidth, y);
-      doc.text(formatTime(workTime), startX + 6 * columnWidth, y);
-      doc.text(formatTime(halfWorkTime), startX + 7 * columnWidth, y);
-      doc.text(participant.observations, startX + 8.5 * columnWidth, y);
+      doc.text(participant.alarmTime ? new Date(participant.alarmTime).toLocaleTimeString() : '', startX + 2.8 * columnWidth, y);
+      doc.text(participant.endTime ? new Date(participant.endTime).toLocaleTimeString() : '', startX + 3.5 * columnWidth, y);
+      doc.text(formatTime(totalTime), startX + 4.2 * columnWidth, y);
+      doc.text(formatTime(workTime), startX + 5 * columnWidth, y);
+      doc.text(formatTime(halfWorkTime), startX + 5.8 * columnWidth, y);
+      doc.text(participant.observations, startX + 6.7 * columnWidth, y);
       y += 10;
     });
-    doc.save('tabla.pdf');
+    const fileName = `test_consumo_${new Date().getDate()}_${new Date().getMonth() + 1}_${new Date().getFullYear()}.pdf`;
+    doc.save(fileName);
   };
 
   const exportExcel = () => {
@@ -182,17 +195,19 @@ const App = () => {
     const workbook = utils.book_new();
     utils.book_append_sheet(workbook, worksheet, 'Participantes');
     const configSheet = utils.aoa_to_sheet([
+      ['Fecha', new Date().toLocaleDateString()],
       ['Nivel de Protección', protectionLevel],
       ['Tipo de ERA', eraType],
     ]);
     utils.book_append_sheet(workbook, configSheet, 'Configuración');
-    writeFile(workbook, 'participantes.xlsx');
+    const fileName = `test_consumo_${new Date().getDate()}_${new Date().getMonth() + 1}_${new Date().getFullYear()}.xlsx`;
+    writeFile(workbook, fileName);
   };
 
   return (
     <div className="main-container">
       <button className="btn btn-sm btn-light btn-corner" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        <i class="bi bi-braces-asterisk"></i>
+        <i className="bi bi-braces-asterisk"></i>
       </button>
       <div className="header d-flex flex-row justify-content-evenly align-items-center">
         <h1>Control Test de Consumo</h1>
@@ -202,8 +217,8 @@ const App = () => {
         <button className="btn btn-sm btn-secondary btn-config" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
           <i className="bi bi-gear-wide-connected"></i>
         </button>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
+        <div className="collapse" id="collapseExample">
+          <div className="card card-body">
             <div className="config-section">
               <h3>Configuración General del Ejercicio</h3>
               <div className='d-flex flex-row'>
