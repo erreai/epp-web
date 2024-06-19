@@ -22,7 +22,7 @@ const ParticipantRow = ({ participant, index, updateParticipant }) => {
       clearInterval(timer);
     }
     return () => clearInterval(timer);
-  }, [participant.startTime, participant.endTime]);
+  }, [participant.startTime, participant.endTime, index, updateParticipant]);
 
   const handleStart = () => {
     if (!participant.startTime) {
@@ -104,8 +104,8 @@ const App = () => {
     doc.text('Alarma', 100, 20);
     doc.text('Término', 150, 20);
     doc.text('Tiempo total', 200, 20);
-    doc.text('Tiempo de Trabajo', 250, 20);
-    doc.text('Tiempo de Trabajo / 2', 300, 20);
+    doc.text('Inicio-Alarma', 250, 20);
+    doc.text('Tiempo de Trabajo', 300, 20);
 
     let y = 30;
     participants.forEach((participant, index) => {
@@ -128,7 +128,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Participantes</h1>
+      <h1>Control Test de Consumo</h1>
       <h2>Hora actual: {currentTime.toLocaleTimeString()}</h2>
       <button onClick={exportPDF}>Exportar a PDF</button>
       <table border="1">
