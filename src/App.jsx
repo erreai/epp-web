@@ -223,35 +223,35 @@ const App = () => {
 
   return (
     <div className="main-container">
-      <button className="btn btn-sm btn-light btn-corner" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        <i className="bi bi-braces-asterisk"></i>
+      <button id='developerModal' className="btn btn-sm btn-light btn-corner" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i className='bi bi-braces-asterisk'></i>
       </button>
       <div className="header d-flex flex-row justify-content-evenly align-items-center">
         <h1>Control Test de Consumo</h1>
         <h2>Hora actual: {currentTime.toLocaleTimeString()}</h2>
       </div>
       <div className="className">
-        <button className="btn btn-sm btn-secondary btn-config" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          <i className="bi bi-gear-wide-connected"></i>
+        <button id='configCollapse' className="btn btn-sm btn-secondary btn-config" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          <i className='bi bi-gear-wide-connected'></i>
         </button>
-        <div className="collapse" id="collapseExample">
-          <div className="card card-body">
-            <div className="config-section">
+        <div className='collapse' id='collapseExample'>
+          <div className='card card-body'>
+            <div className='config-section'>
               <h3>Configuración General del Ejercicio</h3>
               <div className='d-flex flex-row'>
                 <label className='label-bold label'>Nivel de Protección:</label>
                 <div className='options'>
-                  <label><input type="radio" value="A" checked={protectionLevel === 'A'} onChange={() => setProtectionLevel('A')} /> A</label>
-                  <label><input type="radio" value="B" checked={protectionLevel === 'B'} onChange={() => setProtectionLevel('B')} /> B</label>
-                  <label><input type="radio" value="C" checked={protectionLevel === 'C'} onChange={() => setProtectionLevel('C')} /> C</label>
-                  <label><input type="radio" value="D" checked={protectionLevel === 'D'} onChange={() => setProtectionLevel('D')} /> D</label>
+                  <label><input id="eppA" type="radio" value="A" checked={protectionLevel === 'A'} onChange={() => setProtectionLevel('A')} /> A</label>
+                  <label><input id="eppB" type="radio" value="B" checked={protectionLevel === 'B'} onChange={() => setProtectionLevel('B')} /> B</label>
+                  <label><input id="eppC" type="radio" value="C" checked={protectionLevel === 'C'} onChange={() => setProtectionLevel('C')} /> C</label>
+                  <label><input id="eppD" type="radio" value="D" checked={protectionLevel === 'D'} onChange={() => setProtectionLevel('D')} /> D</label>
                 </div>
               </div>
               <div className='d-flex flex-row'>
                 <label className='label-bold label'>Tipo de ERA:</label>
                 <div className='options'>
-                  <label><input type="radio" value="Circuito Abierto" checked={eraType === 'Circuito Abierto'} onChange={() => setEraType('Circuito Abierto')} /> Circuito Abierto</label>
-                  <label><input type="radio" value="Circuito Cerrado" checked={eraType === 'Circuito Cerrado'} onChange={() => setEraType('Circuito Cerrado')} /> Circuito Cerrado</label>
+                  <label><input id="eraAbierto" type="radio" value="Circuito Abierto" checked={eraType === 'Circuito Abierto'} onChange={() => setEraType('Circuito Abierto')} /> Circuito Abierto</label>
+                  <label><input id="eraCerrado" type="radio" value="Circuito Cerrado" checked={eraType === 'Circuito Cerrado'} onChange={() => setEraType('Circuito Cerrado')} /> Circuito Cerrado</label>
                 </div>
               </div>
             </div>
@@ -282,12 +282,12 @@ const App = () => {
       </div>
       <div className="mt-1 ms-2">
         {participants.length < 24 && (
-          <button className='btn btn-sm btn-primary' onClick={addParticipant}>Agregar Participante</button>
+          <button id='addParticipant' className='btn btn-sm btn-primary' onClick={addParticipant}>Agregar Participante</button>
         )}
       </div>
       <div className="d-flex flex-row justify-content-evenly mt-3 ms-2">
-        <button className='btn btn-success' onClick={exportPDF}>Exportar a PDF</button>
-        <button className='btn btn-success' onClick={exportExcel}>Exportar a Excel</button>
+        <button id="exportPDF" className='btn btn-success' onClick={exportPDF}>Exportar a PDF</button>
+        <button id='exportXLSX' className='btn btn-success' onClick={exportExcel}>Exportar a Excel</button>
       </div>
       <div className="footer mt-3 pe-2">
         <p className="text-end mb-0">Licencia <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3</a>. Bomberos de Chile</p>
