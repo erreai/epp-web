@@ -127,7 +127,7 @@ const App = () => {
     }
   };
   const addParticipant = () => {
-    if (participants.length < 24) {
+    if (participants.length < 40) {
       setParticipants([...participants, {
         name: '',
         startTime: null,
@@ -301,7 +301,7 @@ const App = () => {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <p>Esta WebApp fue creada por Raimundo Concha Corti, Instructor ANB. Cuerpo de Bomberos de Ñuñoa.</p>
+            <p>Esta WebApp fue creada por Raimundo Concha Corti, Instructor ANB. <a href='https://www.bomba2.cl' target='_blank'>Segunda Compañía</a> Cuerpo de Bomberos de Ñuñoa.</p>
             <p>Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel="noreferrer">Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua.</p>
             <p>Repo: <a href='https://github.com/erreai/epp-web'>https://github.com/erreai/epp-web</a></p>
             <p>2024</p>
