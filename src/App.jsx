@@ -281,7 +281,7 @@ const App = () => {
         </table>
       </div>
       <div className="mt-1 ms-2">
-        {participants.length < 24 && (
+        {participants.length < 40 && (
           <button id='addParticipant' className='btn btn-sm btn-primary' onClick={addParticipant}>Agregar Participante</button>
         )}
       </div>
