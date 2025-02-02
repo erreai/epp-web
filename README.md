@@ -2,7 +2,7 @@
 
 - Esta aplicación es un re-trabajo sobre el software creado por Claudio Gonzalez Morales, instructor ANB del Cuerpo de Bomberos de Codegua.
 - En la parte superior derecha se encuentra un engranaje que despliega la configuración del ejercicio, en el cual se puede establecer que tipo de ERA y EPP se está utilizando.
-- Se despliegan por defecto 16 participante, ampliable hasta 24.
+- Se despliegan por defecto 16 participante, ampliable hasta 40.
 - La información se puede exportar en formato PDF o xlsx.
 
 Esta aplicación fue creada por Raimundo Concha Corti, instructor ANB, perteneceinte a la [Segunda Compañía](https://www.bomba2.cl) del [Cuerpo de Bomberos de Ñuñoa](https://www.cbn.cl).
