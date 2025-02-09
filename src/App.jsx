@@ -292,23 +292,37 @@ const App = () => {
       <div className="footer mt-3 pe-2">
         <p className="text-end mb-0">Licencia <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3</a>. Bomberos de Chile</p>
       </div>
-
+      <button id='developerModal2' className="btn btn-sm btn-light btn-corner" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+        <i className='bi bi-braces-asterisk'></i>
+      </button>
       
       <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div className="modal-body">
-            <p>Esta WebApp fue creada por Raimundo Concha Corti, Instructor ANB. <a href='https://www.bomba2.cl' target='_blank' rel='noreferrer'>Segunda Compañía</a> Cuerpo de Bomberos de Ñuñoa.</p>
-            <p>Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel='noreferrer'>Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua.</p>
-            <p>Repo: <a href='https://github.com/erreai/epp-web'>https://github.com/erreai/epp-web</a></p>
-            <p>2024</p>
-            <a href='mural.html' target='_blank' rel='noreferrer'>mural</a>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <p>Esta WebApp fue creada por Raimundo Concha Corti, Instructor ANB. <a href='https://www.bomba2.cl' target='_blank' rel='noreferrer'>Segunda Compañía</a> Cuerpo de Bomberos de Ñuñoa.</p>
+              <p>Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel='noreferrer'>Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua.</p>
+              <p>Repo: <a href='https://github.com/erreai/epp-web'>https://github.com/erreai/epp-web</a></p>
+              <p>2024</p>
+            </div>
           </div>
         </div>
       </div>
+
+      <div className="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <iframe src='https://app.mural.co/embed/4ed2a1bb-2b62-4303-a0ce-7658ab287efc' width='100%' height='480px' style='min-width: 640px; min-height: 480px; background-color: #f4f4f4; border: 1px solid #efefef' sandbox='allow-same-origin allow-scripts allow-modals allow-popups allow-popups-to-escape-sandbox'/>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
