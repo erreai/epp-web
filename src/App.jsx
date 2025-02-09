@@ -305,6 +305,7 @@ const App = () => {
             <p>Basado en el Control Test de Consumo de <a href='https://www.instagram.com/fundacionblancamarisol' target='_blank' rel='noreferrer'>Claudio Gonzalez Morales</a>, Cuerpo de Bomberos de Codegua.</p>
             <p>Repo: <a href='https://github.com/erreai/epp-web'>https://github.com/erreai/epp-web</a></p>
             <p>2024</p>
+            <a href='mural.html' target='_blank' rel='noreferrer'>mural</a>
           </div>
         </div>
       </div>
