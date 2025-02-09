@@ -319,7 +319,7 @@ const App = () => {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <iframe src='https://app.mural.co/embed/4ed2a1bb-2b62-4303-a0ce-7658ab287efc' width='100%' height='480px' style='min-width: 640px; min-height: 480px; background-color: #f4f4f4; border: 1px solid #efefef' sandbox='allow-same-origin allow-scripts allow-modals allow-popups allow-popups-to-escape-sandbox'/>
+              <iframe title='Mural Test' src='https://app.mural.co/embed/4ed2a1bb-2b62-4303-a0ce-7658ab287efc' width='100%' height='480px' style='{{ min-width: 640px; min-height: 480px; background-color: #f4f4f4; border: 1px solid #efefef }}' sandbox='allow-same-origin allow-scripts allow-modals allow-popups allow-popups-to-escape-sandbox'/>
             </div>
           </div>
         </div>
