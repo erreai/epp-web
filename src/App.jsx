@@ -11,7 +11,8 @@
  * COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Ver el
  * Licencia Pública General GNU para más detalles.
  * 
- * Asimismo, si usted está leyendo esto, y encuentra que el código es desprolijo: Bienvenido sea a dejar su PR en el repo para que esto crezca, si no, mala cuea.
+ * Asimismo, si usted está leyendo esto, y encuentra que el código es desprolijo: 
+ * Bienvenido sea a dejar su PR en el repo para que esto crezca, si no, mala cuea.
  *
  * Deberías haber recibido una copia de la Licencia Pública General GNU
  * junto con WebApp Control Test de Consumo. En caso contrario, consulte <https://www.gnu.org/licenses/>.
