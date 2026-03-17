@@ -96,7 +96,7 @@ const ParticipantRow = ({ participant, index, updateParticipant, fcEnabled, paEn
             onChange={(e) =>
               updateParticipant(index, 'fcStart', e.target.value, true)
             }
-            placeholder="FC"
+            placeholder="Inicial"
             style={{width:'70px'}}
           />
         </td>
@@ -110,7 +110,7 @@ const ParticipantRow = ({ participant, index, updateParticipant, fcEnabled, paEn
             onChange={(e) =>
               updateParticipant(index, 'fcEnd', e.target.value, true)
             }
-            placeholder="FC"
+            placeholder="Final"
             style={{width:'70px'}}
           />
         </td>
