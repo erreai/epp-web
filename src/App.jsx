@@ -10,6 +10,8 @@
  * pero SIN NINGUNA GARANTÍA; sin siquiera la garantía implícita de
  * COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Ver el
  * Licencia Pública General GNU para más detalles.
+ * 
+ * Asimismo, si usted está leyendo esto, y encuentra que el código es desprolijo: Bienvenido sea a dejar su PR en el repo para que esto crezca, si no, mala cuea.
  *
  * Deberías haber recibido una copia de la Licencia Pública General GNU
  * junto con WebApp Control Test de Consumo. En caso contrario, consulte <https://www.gnu.org/licenses/>.
@@ -34,7 +36,7 @@ const formatTime = (ms) => {
   return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
-const ParticipantRow = ({ participant, index, updateParticipant }) => {
+const ParticipantRow = ({ participant, index, updateParticipant, fcEnabled, paEnabled }) => {
   useEffect(() => {
     let timer;
     if (participant.startTime && !participant.endTime) {
@@ -45,7 +47,7 @@ const ParticipantRow = ({ participant, index, updateParticipant }) => {
       clearInterval(timer);
     }
     return () => clearInterval(timer);
-  }, [participant.startTime, participant.endTime, index, updateParticipant]);
+  }, [participant.startTime, participant.endTime, index, updateParticipant, fcEnabled, paEnabled]);
 
   const handleStart = () => {
     if (!participant.startTime) {
@@ -86,6 +88,61 @@ const ParticipantRow = ({ participant, index, updateParticipant }) => {
       <td data-icon="d-sm-none bi bi-alarm" data-label="Inicio-Alarma">{formatTime(workTime)}</td>
       <td data-icon="d-sm-none bi bi-plus-slash-minus" data-label="Trabajo" >{formatTime(halfWorkTime)}</td>
       <td data-icon="bi bi-pencil-square" data-label="Obs."><input type="text" value={participant.observations} onChange={(e) => updateParticipant(index, 'observations', e.target.value, true)} /></td>
+      {fcEnabled && (
+        <td data-label="FC inicial">
+          <input
+            type="number"
+            value={participant.fcStart}
+            onChange={(e) =>
+              updateParticipant(index, 'fcStart', e.target.value, true)
+            }
+            placeholder="FC"
+            style={{width:'70px'}}
+          />
+        </td>
+      )}
+
+      {fcEnabled && (
+        <td data-label="FC final">
+          <input
+            type="number"
+            value={participant.fcEnd}
+            onChange={(e) =>
+              updateParticipant(index, 'fcEnd', e.target.value, true)
+            }
+            placeholder="FC"
+            style={{width:'70px'}}
+          />
+        </td>
+      )}
+
+    {paEnabled && (
+        <td data-label="Presión inicial">
+          <input
+            type="number"
+            value={participant.paStart}
+            onChange={(e) =>
+              updateParticipant(index, 'paStart', e.target.value, true)
+            }
+            placeholder="Inicial"
+            style={{width:'70px'}}
+          />
+        </td>
+      )}
+
+      {paEnabled && (
+        <td data-label="Presión final">
+          <input
+            type="number"
+            value={participant.paEnd}
+            onChange={(e) =>
+              updateParticipant(index, 'paEnd', e.target.value, true)
+            }
+            placeholder="Final"
+            style={{width:'70px'}}
+          />
+        </td>
+      )}
     </tr>
   );
 };
@@ -97,7 +154,11 @@ const App = () => {
     alarmTime: null,
     endTime: null,
     elapsedTime: 0,
-    observations: ''
+    observations: '',
+    fcStart: '',
+    fcEnd: '',
+    paStart: '',
+    paEnd: ''
   }));
 
   const [participants, setParticipants] = useState(initialParticipants);
@@ -105,6 +166,8 @@ const App = () => {
 
   const [protectionLevel, setProtectionLevel] = useState('D');
   const [eraType, setEraType] = useState('Circuito Abierto');
+  const [fcEnabled, setfcEnabled] = useState(false);
+  const [paEnabled, setpaEnabled] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -134,7 +197,11 @@ const App = () => {
         alarmTime: null,
         endTime: null,
         elapsedTime: 0,
-        observations: ''
+        observations: '',
+        fcStart: '',
+        fcEnd: '',
+        paStart:'',
+        paEnd: ''
       }]);
     }
   };
@@ -155,7 +222,7 @@ const App = () => {
     doc.text(`Tipo de ERA: ${eraType}`, 150, 10);
     doc.setFontSize(20);
     doc.text('Tabla de Participantes', 10, 20);
-    doc.setFontSize(10);
+    doc.setFontSize(9);
     // Ajusta el tamaño de la letra y la distancia entre columnas
     const startX = 5;
     const startY = 30;
@@ -170,6 +237,8 @@ const App = () => {
     doc.text('Inicio-Alarma', startX + 5 * columnWidth, startY);
     doc.text('T. de Trabajo', startX + 5.8 * columnWidth, startY);
     doc.text('Observaciones', startX + 6.7 * columnWidth, startY);
+    doc.text('FC Inicial - Final', startX + 7.7 * columnWidth, startY);
+    doc.text('Presión Arterial', startX + 8.6 * columnWidth, startY);
 
     let y = startY + 10;
     participants.forEach((participant, index) => {
@@ -180,6 +249,7 @@ const App = () => {
       const workTime = participant.alarmTime ? (participant.alarmTime - participant.startTime) : 0;
       const halfWorkTime = workTime / 2;
       const totalTime = participant.endTime ? (participant.endTime - participant.startTime) : 0;
+      let diferenciaPresion = (participant.paEnd&&participant.paStart)?(parseInt(participant.paEnd) - parseInt(participant.paStart)).toString():'';
 
       doc.text(`${`${index + 1} ` + participant.name}`, startX, y);
       doc.text(participant.startTime ? new Date(participant.startTime).toLocaleTimeString() : '', startX + 2 * columnWidth, y);
@@ -189,6 +259,11 @@ const App = () => {
       doc.text(formatTime(workTime), startX + 5 * columnWidth, y);
       doc.text(formatTime(halfWorkTime), startX + 5.8 * columnWidth, y);
       doc.text(participant.observations, startX + 6.7 * columnWidth, y);
+      doc.text(participant.fcStart+'-', startX + 7.8 * columnWidth, y);
+      doc.text(participant.fcEnd, startX + 8 * columnWidth, y);
+      doc.text(participant.paStart+'-', startX + 8.6 * columnWidth, y);
+      doc.text(participant.paEnd, startX + 8.8 * columnWidth, y);
+      doc.text('('+diferenciaPresion+')', startX + 9 * columnWidth, y);
       y += 10;
     });
     const fileName = `test_consumo_${new Date().getDate()}_${new Date().getMonth() + 1}_${new Date().getFullYear()}.pdf`;
@@ -206,6 +281,11 @@ const App = () => {
       'Tiempo de Trabajo': formatTime(participant.alarmTime ? (participant.alarmTime - participant.startTime) : 0),
       'Tiempo de Trabajo / 2': formatTime((participant.alarmTime ? (participant.alarmTime - participant.startTime) : 0) / 2),
       'Observaciones': participant.observations,
+      'FC Inicial': participant.fcStart,
+      'FC Final': participant.fcEnd,
+      'PA Inicial': participant.paStart,
+      'PA Final': participant.paEnd,
+      'Diferencia PA': (participant.paEnd - participant.paStart)
     }));
 
     const worksheet = utils.json_to_sheet(data);
@@ -254,6 +334,24 @@ const App = () => {
                   <label><input id="eraCerrado" type="radio" value="Circuito Cerrado" checked={eraType === 'Circuito Cerrado'} onChange={() => setEraType('Circuito Cerrado')} /> Circuito Cerrado</label>
                 </div>
               </div>
+              <div className='d-flex flex-row'>
+                <label className='label-bold label'>Registrar frecuencia cardíaca:</label>
+                <input
+                  className='mt-2'
+                  type="checkbox"
+                  checked={fcEnabled}
+                  onChange={(e) => setfcEnabled(e.target.checked)}
+                />
+              </div>
+              <div className='d-flex flex-row'>
+                <label className='label-bold label'>Registrar presión arterial:</label>
+                <input
+                  className='mt-2'
+                  type="checkbox"
+                  checked={paEnabled}
+                  onChange={(e) => setpaEnabled(e.target.checked)}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -271,11 +369,22 @@ const App = () => {
               <th>Inicio-Alarma </th>
               <th>Tiempo de Trabajo</th>
               <th>Observaciones</th>
+              {fcEnabled && <th>FC inicial</th>}
+              {fcEnabled && <th>FC final</th>}
+              {paEnabled && <th>PA inicial</th>}
+              {paEnabled && <th>PA final</th>}
             </tr>
           </thead>
           <tbody>
             {participants.map((participant, index) => (
-              <ParticipantRow key={index} index={index} participant={participant} updateParticipant={updateParticipant} />
+              <ParticipantRow 
+              key={index} 
+              index={index} 
+              participant={participant} 
+              updateParticipant={updateParticipant}
+              fcEnabled={fcEnabled}
+              paEnabled={paEnabled}
+              />
             ))}
           </tbody>
         </table>
